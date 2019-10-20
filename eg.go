@@ -23,7 +23,6 @@ import (
 var (
 	helpFlag       = flag.Bool("help", false, "show detailed help message")
 	templateFlag   = flag.String("t", "", "template.go file specifying the refactoring")
-	transitiveFlag = flag.Bool("transitive", false, "apply refactoring to all dependencies too")
 	writeFlag      = flag.Bool("w", false, "rewrite input files in place (by default, the results are printed to standard output)")
 	verboseFlag    = flag.Bool("v", false, "show verbose matcher diagnostics")
 
@@ -49,14 +48,15 @@ func init() {
 
 const usage = `eg: an example-based refactoring tool.
 
-Usage: eg -t template.go [-w] [-transitive] <args>...
+Usage: eg -t template.go [-w] <args>...
 
 -help            show detailed help message
 -t template_file specifies the template file (use -help to see explanation)
 -w          	 causes files to be re-written in place.
--transitive 	 causes all dependencies to be refactored too.
 -v               show verbose matcher diagnostics
 -beforeedit cmd  a command to exec before each file is modified.
+                 "{}" represents the name of the file.
+-afteredit  cmd  a command to exec after each file is edited (e.g sed).
                  "{}" represents the name of the file.
 `
 
