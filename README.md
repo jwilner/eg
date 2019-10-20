@@ -39,6 +39,10 @@ go run ~/code/eg/eg.go \
 
 Example diff:
 ```diff
+ import (
++       "fmt"
+	"os"
+...
         if err := os.Mkdir(full, m.mode); err != nil {
 -               return nil, errors.Wrap(err, "create cache")
 +               return nil, fmt.Errorf("create cache: %w", err)
